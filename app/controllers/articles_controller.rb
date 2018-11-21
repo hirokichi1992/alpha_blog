@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     #render plain: params[:article].inspect //userのpost内容を確認
     #debugger //gem byebug で使えるデバッグ用 ここでとまる 進むときは「n」 抜けるときは「control d」
     @article = Article.new(article_params)
-    @article.user = User.last
+    @article.user = current_user
     if @article.save
       flash[:success] = "Article was successflly created"
       redirect_to article_path(@article)
