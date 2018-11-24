@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     password = params[:sessions][:password]
     user = User.find_by(email: email)
     if login(email, password)
-      flash[:success] = "Hi! You has successfully logged in  Your mail-address is #{params[:sessions][:email]} #{params[:sessions][:password]} #{session[:user_id]} "
+      flash[:success] = "Hi! You has successfully logged in"
       redirect_to user_path(user)
     else
       flash.now[:danger] = "There was something wrong with your login infomation"
