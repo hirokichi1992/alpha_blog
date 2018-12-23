@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
-  
+
   def new
-  
+
   end
-  
+
   def create
     email = params[:sessions][:email].downcase
     password = params[:sessions][:password]
@@ -16,13 +16,13 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
-  
+
   def destroy
     session[:user_id] = nil
     flash[:success] = "You have successfully logged out"
     redirect_to root_path
   end
-  
+
   private
 
   def login(email, password)

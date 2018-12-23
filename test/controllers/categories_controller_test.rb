@@ -3,8 +3,9 @@ require 'test_helper'
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
   def setup
     @category = Category.create(name: "sports")
+    @user = User.create(username: "hiroki3", email: "hiroki3@a.a", password: "password", admin: true)
   end
-  
+
   test "should get categories index" do
     get categories_path
     assert_response :success
@@ -16,19 +17,16 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
+    sign_in_as(@user)
     get new_category_path
     assert_response :success
   end
 
-  test "invalid category submission results in failure" do
-    get new_category_path
-    assert_template 'categories/new'
+  test "shuold redirect create when admin not logged in" do
     assert_no_difference 'Category.count' do
-      post categories_path, params: { category: {name: " "} }
+      post categories_path, params: { category:{ name: "sports"} }
     end
-    assert_template 'categories/new'
-    assert_select 'h2.panel-title'
-    assert_select 'div.panel-body'
+    assert_redirected_to categories_path
   end
 
 end
