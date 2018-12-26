@@ -46,6 +46,10 @@ $navbar-default-bg: green;
     margin-top: 15px;
 }
 
+.navbar-default .navbar-nav>li>a{
+  color: #dff0d8;
+}
+
 .article-actions{
     border-top: 1px solid #eaeaea;
     padding-top: 5px;
